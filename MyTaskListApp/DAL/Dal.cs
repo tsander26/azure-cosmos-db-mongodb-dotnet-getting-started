@@ -14,8 +14,8 @@ namespace MyTaskListApp
     {
         //private MongoServer mongoServer = null;
         private bool disposed = false;
-
-        // Cosmos DB connection string information
+        
+        //  STEP 1- Fill in Cosmos DB connection string information
         private string userName = "FILLME";
         private string host = "FILLME";
         private string password = "FILLME";
@@ -61,6 +61,22 @@ namespace MyTaskListApp
 
         private IMongoCollection<MyTask> GetTasksCollection()
         {
+        
+        // Step 2- Uncomment this section after the migration
+         /**
+            MongoClientSettings settings = new MongoClientSettings();
+            settings.Server = new MongoServerAddress(host, 10255);
+            settings.UseSsl = true;
+            settings.SslSettings = new SslSettings();
+            settings.SslSettings.EnabledSslProtocols = SslProtocols.Tls12;
+
+            MongoIdentity identity = new MongoInternalIdentity(dbName, userName);
+            MongoIdentityEvidence evidence = new PasswordEvidence(password);
+
+            settings.Credential = new MongoCredential("SCRAM-SHA-1", identity, evidence);
+            MongoClient client = new MongoClient(settings);
+    **/
+            // Step 3- Delete this line after the migration.
             MongoClient client = new MongoClient("mongodb://40.74.232.123:27017");    
             
             var database = client.GetDatabase(dbName);
@@ -70,6 +86,23 @@ namespace MyTaskListApp
 
         private IMongoCollection<MyTask> GetTasksCollectionForEdit()
         {
+        // Step 4- Uncomment this section after the migration
+                 /**
+            MongoClientSettings settings = new MongoClientSettings();
+            settings.Server = new MongoServerAddress(host, 10255);
+            settings.UseSsl = true;
+            settings.SslSettings = new SslSettings();
+            settings.SslSettings.EnabledSslProtocols = SslProtocols.Tls12;
+
+            MongoIdentity identity = new MongoInternalIdentity(dbName, userName);
+            MongoIdentityEvidence evidence = new PasswordEvidence(password);
+
+            settings.Credential = new MongoCredential("SCRAM-SHA-1", identity, evidence);
+            
+            MongoClient client = new MongoClient(settings);
+    **/
+    
+            // Step 5 - delete this line after the migration
             MongoClient client = new MongoClient("mongodb://40.74.232.123:27017");
             
             var database = client.GetDatabase(dbName);
