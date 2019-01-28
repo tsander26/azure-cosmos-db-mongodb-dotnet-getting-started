@@ -12,10 +12,13 @@ namespace MyTaskListApp
 {
     public class Dal : IDisposable
     {
+        //Before migration - MongoDB VM Ip address
+        private string mongodbAddress = "FILL ME";
+    
         //private MongoServer mongoServer = null;
         private bool disposed = false;
         
-        //  STEP 1- Fill in Cosmos DB connection string information
+        // After migration- Fill in Cosmos DB connection string information
         private string userName = "FILLME";
         private string host = "FILLME";
         private string password = "FILLME";
@@ -62,7 +65,7 @@ namespace MyTaskListApp
         private IMongoCollection<MyTask> GetTasksCollection()
         {
         
-        // Step 2- Uncomment this section after the migration
+        // After Migration- Uncomment this section after the migration
          /**
             MongoClientSettings settings = new MongoClientSettings();
             settings.Server = new MongoServerAddress(host, 10255);
@@ -76,8 +79,8 @@ namespace MyTaskListApp
             settings.Credential = new MongoCredential("SCRAM-SHA-1", identity, evidence);
             MongoClient client = new MongoClient(settings);
     **/
-            // Step 3- Delete this line after the migration.
-            MongoClient client = new MongoClient("mongodb://40.74.232.123:27017");    
+            // After Migration- Delete this line after the migration.
+            MongoClient client = new MongoClient(mongodbAddress);    
             
             var database = client.GetDatabase(dbName);
             var todoTaskCollection = database.GetCollection<MyTask>(collectionName);
@@ -86,7 +89,7 @@ namespace MyTaskListApp
 
         private IMongoCollection<MyTask> GetTasksCollectionForEdit()
         {
-        // Step 4- Uncomment this section after the migration
+        // After Migration- Uncomment this section after the migration
                  /**
             MongoClientSettings settings = new MongoClientSettings();
             settings.Server = new MongoServerAddress(host, 10255);
@@ -102,8 +105,8 @@ namespace MyTaskListApp
             MongoClient client = new MongoClient(settings);
     **/
     
-            // Step 5 - delete this line after the migration
-            MongoClient client = new MongoClient("mongodb://40.74.232.123:27017");
+            // After Migration - delete this line after the migration
+            MongoClient client = new MongoClient(mongodbAddress);
             
             var database = client.GetDatabase(dbName);
             var todoTaskCollection = database.GetCollection<MyTask>(collectionName);
