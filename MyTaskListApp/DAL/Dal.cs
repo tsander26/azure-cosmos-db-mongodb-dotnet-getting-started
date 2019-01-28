@@ -18,7 +18,7 @@ namespace MyTaskListApp
         //private MongoServer mongoServer = null;
         private bool disposed = false;
         
-        // After migration- Fill in Cosmos DB connection string information
+        // After migration- STEP 1 - Fill in Cosmos DB connection string information
         private string userName = "FILLME";
         private string host = "FILLME";
         private string password = "FILLME";
@@ -65,7 +65,7 @@ namespace MyTaskListApp
         private IMongoCollection<MyTask> GetTasksCollection()
         {
         
-        // After Migration- Uncomment this section after the migration
+        // After Migration- STEP 2 - Uncomment this section after the migration
          /**
             MongoClientSettings settings = new MongoClientSettings();
             settings.Server = new MongoServerAddress(host, 10255);
@@ -79,7 +79,7 @@ namespace MyTaskListApp
             settings.Credential = new MongoCredential("SCRAM-SHA-1", identity, evidence);
             MongoClient client = new MongoClient(settings);
     **/
-            // After Migration- Delete this line after the migration.
+            // After Migration- STEP 3- Delete this line after the migration.
             MongoClient client = new MongoClient(mongodbAddress);    
             
             var database = client.GetDatabase(dbName);
@@ -89,7 +89,7 @@ namespace MyTaskListApp
 
         private IMongoCollection<MyTask> GetTasksCollectionForEdit()
         {
-        // After Migration- Uncomment this section after the migration
+        // After Migration- STEP 4 - Uncomment this section after the migration
                  /**
             MongoClientSettings settings = new MongoClientSettings();
             settings.Server = new MongoServerAddress(host, 10255);
@@ -105,7 +105,7 @@ namespace MyTaskListApp
             MongoClient client = new MongoClient(settings);
     **/
     
-            // After Migration - delete this line after the migration
+            // After Migration - STEP 5 -  delete this line after the migration
             MongoClient client = new MongoClient(mongodbAddress);
             
             var database = client.GetDatabase(dbName);
